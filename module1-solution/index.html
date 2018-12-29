@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Lunch Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+      .message { font-size: 1.3em; font-weight: bold; }
+    </style>
+  </head>
+<body ng-app="LunchCheck">
+   <div class="container" ng-controller="LunchCheckCtrl">
+     <h1>Lunch Checker</h1>
+
+         <div class="form-group {{(message == 'Enjoy!' || message == 'Too much!') ? 'has-success' : (message == 'Please enter data first') ? 'has-error' : ''}}">
+             <!-- I do NOT consider an empty item to count. -->
+             <p>I'm not considering an empty item towards the count. Thank you! :)</p>
+             <input id="lunch-menu" type="text"
+             placeholder="list comma separated dishes you usually have for lunch"
+             class="form-control" ng-model="lista">
+         </div>
+         <div class="form-group">
+             <button class="btn btn-default" ng-click="checkItems()">Check If Too Much</button>
+         </div>
+         <div class="form-group message" ng-style="{color: message == 'Enjoy!' || message == 'Too much!' ? 'green' : 'red'}">
+           <!-- Your message can go here. -->
+           {{message}}
+         </div>
+   </div>
+
+</body>
+</html>
