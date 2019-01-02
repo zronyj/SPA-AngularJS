@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Shopping List Check Off</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .emptyMessage {
+        font-weight: bold;
+        color: red;
+        font-size: 1.2em;
+      }
+      li {
+        margin-bottom: 7px;
+        font-size: 1.2em;
+      }
+      li > button {
+        margin-left: 6px;
+      }
+    </style>
+  </head>
+<body ng-app="ShoppingListCheckOff">
+  <div class="container">
+  <h1>Shopping List Check Off</h1>
+
+  <div class="row">
+
+    <!-- To Buy List -->
+    <div class="col-md-6" ng-controller="ToBuyController as TBCtrl">
+      <h2>To Buy:</h2>
+      <form class="form-inline">
+          <input type="text" class="form-control" ng-model="TBCtrl.itemName" placeholder="Item name">
+          <input type="text" class="form-control" ng-model="TBCtrl.itemQuantity" placeholder="Quantity">
+          <button class="btn btn-primary" ng-click="TBCtrl.addItem()">
+            <span class="glyphicon glyphicon-plus"></span> Add
+          </button>
+      </form>
+     <br><br>
+     <ul>
+       <li ng-repeat="item in TBCtrl.items">
+        Buy {{item.quantity}} {{item.name}}.
+        <button ng-click="TBCtrl.buyItem($index)" class="btn btn-success">
+          <span class="glyphicon glyphicon-ok"></span> Bought
+        </button>
+        <button ng-click="TBCtrl.remItem($index)" class="btn btn-danger">
+          <span class="glyphicon glyphicon-remove"></span> Remove
+        </button>
+      </li>
+     </ul>
+     <div class="emptyMessage" ng-if="TBCtrl.items.length == 0">Everything is bought!</div>
+    </div>
+
+    <!-- Already Bought List -->
+    <div class="col-md-6" ng-controller="AlreadyBoughtController as ABCtrl">
+     <h2>Already Bought:</h2>
+      <div>
+        <button class="btn btn-warning" ng-click="ABCtrl.clearItems()">
+          <span class="glyphicon glyphicon-remove"></span> Clear list
+        </button>
+      </div>
+      <br><br>
+     <ul>
+      <li ng-repeat="item in ABCtrl.items">Bought {{item.quantity}} {{item.name}}.</li>
+     </ul>
+     <div class="emptyMessage" ng-if="ABCtrl.items.length == 0">Nothing bought yet.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
