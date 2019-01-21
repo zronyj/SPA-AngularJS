@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row" ng-repeat="item in list.items">
+        <br>
+        <div class="col-sm-1"><b>({{item.short_name}})</b></div>
+        <div class="col-sm-2">{{item.name}}</div>
+        <div class="col-sm-7"><i>{{item.description}}</i></div>
+        <div class="col-sm-2">
+            <button class="btn btn-danger" ng-click="list.onRemove({index: $index})">Don't want this one!</button>
+        </div>
+        <br>
+    </div>
+</div>
